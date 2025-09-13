@@ -1,12 +1,23 @@
 # -*- mode: python -*-
 
+"""
+PyInstaller build specification for Windows.
+
+This spec uses a dynamically resolved project root and disables encryption of
+the resulting PYZ archive.
+"""
+
+import os
+
 block_cipher = None
+
+ROOT = os.path.abspath('.')
 
 
 a = Analysis(['run.py'],
              pathex=['C:\\Users\\tester\\Desktop\\fqm'],
              binaries=[],
-             datas=[('arabic_reshaper\*', 'arabic_reshaper')],
+             datas=[(os.path.join(ROOT, 'arabic_reshaper', '*'), 'arabic_reshaper')],
              hiddenimports=[
                 'app.gui', 'PyQt5', 'PyQt5.QtWidgets', 'email.mime.multipart', 'win32com.client',
                 'email.mime.message', 'email.mime.text', 'email.mime.image', 'email.mime.audio',
@@ -18,7 +29,7 @@ a = Analysis(['run.py'],
              win_no_prefer_redirects=False,
              win_private_assemblies=False,
              cipher=block_cipher)
-pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
+pyz = PYZ(a.pure, a.zipped_data, cipher=None)
 exe = EXE(pyz,
           a.scripts,
           a.binaries,
