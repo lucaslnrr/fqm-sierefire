@@ -15,7 +15,7 @@ ROOT = os.path.abspath('.')
 
 
 a = Analysis(['run.py'],
-             pathex=['C:\\Users\\tester\\Desktop\\fqm'],
+             pathex=[ROOT],
              binaries=[],
              datas=[(os.path.join(ROOT, 'arabic_reshaper', '*'), 'arabic_reshaper')],
              hiddenimports=[
@@ -40,4 +40,4 @@ exe = EXE(pyz,
           strip=False,
           upx=True,
           console=False ,
-          icon='C:\\Users\\tester\\Desktop\\fqm\\static\\images\\favicon.ico')
+          icon=os.path.join(ROOT, 'static', 'images', 'favicon.ico'))
