@@ -1,12 +1,15 @@
 # -*- mode: python -*-
 
+import os
+
 block_cipher = None
 
+ROOT = os.path.abspath('.')
 
 a = Analysis(['run.py'],
-             pathex=['/Users/mrf3/Documents/FQM'],
+             pathex=[ROOT],
              binaries=[],
-             datas=[('arabic_reshaper/*', 'arabic_reshaper')],
+             datas=[(os.path.join(ROOT, 'arabic_reshaper', '*'), 'arabic_reshaper')],
              hiddenimports=[
                 'app.gui', 'PyQt5', 'PyQt5.QtWidgets', 'email.mime.multipart', 'win32com.client',
                 'email.mime.message', 'email.mime.text', 'email.mime.image', 'email.mime.audio',
@@ -29,4 +32,4 @@ exe = EXE(pyz,
           strip=False,
           upx=True,
           console=False ,
-          icon='/Users/mrf3/Documents/FQM/static/images/favicon.ico')
+          icon=os.path.join(ROOT, 'static', 'images', 'favicon.ico'))
